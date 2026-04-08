@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>後台 - 經歷與學歷管理</title>
+    <title>後台 - 演講紀錄管理</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,9 +19,9 @@
             <nav class="templatemo-left-nav">
                 <ul>
                     <li><a href="./index.html"><i class="fa fa-home fa-fw"></i>控制面板</a></li>
-                    <li><a href="./about.html" class="active"><i class="fa fa-user fa-fw"></i>經歷與學歷</a></li>
+                    <li><a href="./about.html"><i class="fa fa-user fa-fw"></i>經歷與學歷</a></li>
                     <li><a href="./mywork.html"><i class="fa fa-database fa-fw"></i>著作與成果</a></li>
-                    <li><a href="./talks.html"><i class="fa fa-microphone fa-fw"></i>演講紀錄</a></li>
+                    <li><a href="./talks.html" class="active"><i class="fa fa-microphone fa-fw"></i>演講紀錄</a></li>
                     <li><a href="./contact.html"><i class="fa fa-map-marker fa-fw"></i>聯繫資訊</a></li>
                     <li><a href="./manage-users.html"><i class="fa fa-users fa-fw"></i>使用者管理</a></li>
                     <li><a href="./preferences.html"><i class="fa fa-sliders fa-fw"></i>後台設定</a></li>
@@ -33,21 +33,21 @@
             <div class="templatemo-content-container">
                 <div class="templatemo-content-widget no-padding">
                     <div class="panel panel-default table-responsive">
-                        <div class="panel-heading"><h2>經歷與學歷管理</h2></div>
+                        <div class="panel-heading"><h2>演講紀錄管理</h2></div>
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>類型 (經歷/學歷)</th>
-                                    <th>內容/職稱</th>
-                                    <th>時間/年份</th>
+                                    <th>年度/月份</th>
+                                    <th>會議/演講名稱</th>
+                                    <th>地點/機構</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><select class="form-control"><option>經歷</option><option>學歷</option></select></td>
-                                    <td><input type="text" class="form-control" placeholder="例如: 教授, 博士"></td>
-                                    <td><input type="text" class="form-control" placeholder="2025-Present"></td>
+                                    <td><input type="text" class="form-control" placeholder="2025"></td>
+                                    <td><input type="text" class="form-control" placeholder="研討會名稱"></td>
+                                    <td><input type="text" class="form-control" placeholder="地點"></td>
                                     <td><button class="btn btn-primary">新增</button></td>
                                 </tr>
                             </tbody>
