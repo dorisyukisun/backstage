@@ -15,9 +15,10 @@
         .square-upload-box { width: 100px; height: 100px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; background: #fff; margin: 0 auto; }
         .square-upload-box img { width: 100%; height: 100%; object-fit: cover; }
         .carousel-mgmt-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .carousel-mgmt-table th, .carousel-mgmt-table td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        .carousel-mgmt-table th { background-color: #f2f2f2; }
-        .carousel-img-prev { width: 50px; height: 30px; object-fit: contain; border: 1px solid #eee; }
+        .carousel-mgmt-table th { background-color: #f8f9fa; color: #333; font-weight: 600; text-align: center; vertical-align: middle !important; }
+        .carousel-mgmt-table td { text-align: center; vertical-align: middle !important; }
+        .carousel-img-prev { width: 60px; height: 40px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+        .status-label { font-size: 12px; padding: 3px 8px; border-radius: 10px; }
     </style>
 </head>
 <body>  
@@ -29,7 +30,7 @@
         </header>
         <div class="profile-photo-container">
           <img src="images/LSBOY.png" alt="Profile Photo" class="img-responsive">  
-          <div class="profile-//photo-overlay"></div>
+          <div class="profile-photo-overlay"></div>
         </div>      
         <form class="templatemo-search-form" role="search">
           <div class="input-group">
@@ -74,7 +75,7 @@
                         <input type="file" id="bannerInput" style="display:none" accept="image/*" onchange="previewBanner(this)">
                       </div>
                       <div class="col-md-8">
-                        <p>請上傳一張高品質의 Banner 圖片，建議尺寸 1920x600。</p>
+                        <p>請上傳一張高品質的 Banner 圖片，建議尺寸 1920x600。</p>
                         <button class="btn btn-primary" onclick="uploadBanner()">儲存 Banner</button>
                         <button class="btn btn-danger" onclick="removeBanner()">刪除</button>
                       </div>
@@ -84,64 +85,64 @@
               </div>
             </div>
 
-            <!-- 2. 合作單位 Logo 輪播管理 - 按照截圖修改為表格模式 -->
+            <!-- 2. 合作單位 Logo 輪播管理 -->
             <div class="templatemo-content-container">
               <div class="templatemo-content-widget no-padding">
                 <div class="panel panel-default">
-                  <div class="panel-heading"><h2>輪播圖管理</h2></div>
+                  <div class="panel-heading"><h2>合作單位 Logo 輪播管理</h2></div>
                   <div class="panel-body">
-                    <div class="row" style="margin-bottom: 20px; align-items: center;">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>位置：</label>
-                                <select class="form-control">
-                                    <option>運營位1</option>
-                                    <option>運營位2</option>
-                                </select>
+                    <div class="well" style="background: #fdfdfd; border: 1px solid #eee;">
+                        <h4>新增 Logo 項目</h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>上傳圖片</label>
+                                    <input type="file" id="logoInput" accept="image/*" class="form-control" onchange="previewLogo(this)">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>狀態：</label>
-                                <select class="form-control">
-                                    <option>展示中</option>
-                                    <option>未開始</option>
-                                    <option>已結束</option>
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>跳轉連結 (URL)</label>
+                                    <input type="text" id="logoLink" class="form-control" placeholder="https://example.com">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 text-right">
-                            <button class="btn btn-info">搜索</button>
-                            <button class="btn btn-success" onclick="showAddModal()">新增</button>
+                            <div class="col-md-3">
+                                <label>&nbsp;</label>
+                                <button class="btn btn-success btn-block" onclick="addLogo()">新增項目</button>
+                            </div>
                         </div>
                     </div>
                     
                     <table class="carousel-mgmt-table table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>序號</th>
-                                <th>狀態</th>
-                                <th>排序值</th>
-                                <th>所屬位置</th>
-                                <th>展示開始時間</th>
-                                <th>展示結束時間</th>
-                                <th>圖片</th>
-                                <th>操作</th>
+                                <th width="5%">序號</th>
+                                <th width="15%">狀態</th>
+                                <th width="10%">排序</th>
+                                <th width="20%">所屬位置</th>
+                                <th width="20%">生效時間</th>
+                                <th width="15%">預覽</th>
+                                <th width="15%">操作</th>
                             </tr>
                         </thead>
                         <tbody id="logoTableBody">
                             <tr>
                                 <td>1</td>
-                                <td><span class="label label-success">展示中</span></td>
+                                <td><span class="label label-success status-label">展示中</span></td>
                                 <td>1</td>
                                 <td>運營位1</td>
-                                <td>2019-12-03 09:00</td>
-                                <td>2019-12-03 18:00</td>
-                                <td><img src="images/logo1.png" class="carousel-img-prev" onerror="this.src='https://via.placeholder.com/50'"></td>
-                                <td><a href="#" class="text-primary">編輯</a> <a href="#" class="text-danger">刪除</a></td>
+                                <td>2026-04-08 12:00</td>
+                                <td><img src="https://via.placeholder.com/50" class="carousel-img-prev"></td>
+                                <td>
+                                    <a href="#" class="btn btn-xs btn-//primary">編輯</a> 
+                                    <a href="#" class="btn btn-xs btn-danger">刪除</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button class="btn btn-primary btn-lg" onclick="saveAllLogos()">儲存所有輪播設定</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -153,9 +154,9 @@
                 <div class="panel panel-default">
                   <div class="panel-heading"><h2>首頁簡介文字編輯</h2></div>
                   <div class="panel-body">
-                      <div id="editor">在此編輯首頁의 歡迎文字與簡介...</div>
+                      <div id="editor">在此編輯首頁的歡迎文字與簡介...</div>
                       <br>
-                      <button class="btn btn-primary" style="display: block; margin: 0 auto;">儲存內容</button>
+                      <button class="btn btn-primary" style="display: block; margin: 0, auto;">儲存內容</button>
                   </div>
                 </div>
               </div>
