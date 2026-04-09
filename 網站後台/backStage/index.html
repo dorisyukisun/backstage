@@ -84,7 +84,7 @@
               </div>
             </div>
 
-            <!-- 2. 合作單位 Logo 輪播管理 - 精簡為 3 個欄位 -->
+            <!-- 2. 合作單位 Logo 輪播管理 -->
             <div class="templatemo-content-container">
               <div class="templatemo-content-widget no-padding">
                 <div class="panel panel-default">
@@ -93,10 +93,10 @@
                     <div class="well" style="background: #fcfcfc; border: 1px solid #eee;">
                         <h4>新增 Logo</h4>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <input type="file" id="logoInput" accept="image/*" class="form-control" onchange="previewLogo(this)">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <input type="text" id="logoLink" class="form-control" placeholder="貼上網站連結 (https://...)">
                             </div>
                             <div class="col-md-2">
@@ -117,7 +117,10 @@
                             <tr>
                                 <td><img src="https://via.placeholder.com/50" class="carousel-img-prev"></td>
                                 <td>https://example.com</td>
-                                <td><a href="#" class="btn btn-xs btn-danger">刪除</a></td>
+                                <td>
+                                    <button class="btn btn-xs btn-primary" onclick="editLogo(this)">編輯</button>
+                                    <button class="btn btn-xs btn-danger" onclick="removeLogo(this)">刪除</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
