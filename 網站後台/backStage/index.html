@@ -12,10 +12,12 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
     <style>
-        .carousel-preview-container { display: flex; overflow-x: auto; gap: 15px; padding: 15px; background: #f5f5f5; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 20px; }
-        .carousel-item { flex: 0 0 auto; text-align: center; width: 120px; }
-        .carousel-item img { width: 100px; height: 60px; object-fit: contain; border: 1px solid #ccc; background: #fff; display: block; margin: 0 auto 5px; }
-        .carousel-item .remove-btn { color: red; cursor: pointer; font-size: 12px; }
+        .square-upload-box { width: 100px; height: 100px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; background: #fff; margin: 0 auto; }
+        .square-upload-box img { width: 100%; height: 100%; object-fit: cover; }
+        .carousel-mgmt-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .carousel-mgmt-table th, .carousel-mgmt-table td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        .carousel-mgmt-table th { background-color: #f2f2f2; }
+        .carousel-img-prev { width: 50px; height: 30px; object-fit: contain; border: 1px solid #eee; }
     </style>
 </head>
 <body>  
@@ -27,7 +29,7 @@
         </header>
         <div class="profile-photo-container">
           <img src="images/LSBOY.png" alt="Profile Photo" class="img-responsive">  
-          <div class="profile-photo-overlay"></div>
+          <div class="profile-//photo-overlay"></div>
         </div>      
         <form class="templatemo-search-form" role="search">
           <div class="input-group">
@@ -60,14 +62,14 @@
             <!-- 1. 前台 Banner 圖片上傳 -->
             <div class="templatemo-content-container">
               <div class="templatemo-content-widget no-padding">
-                <div class="panel panel-default table-responsive">
+                <div class="panel panel-default">
                   <div class="panel-heading"><h2>前台首頁 Banner 設定</h2></div>
                   <div class="panel-body">
                     <div class="row">
                       <div class="col-md-4 text-center">
-                        <div class="square-upload-box" onclick="document.getElementById('bannerInput').click()" style="width: 100px; height: 100px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; cursor: pointer; margin: 0 auto; background: #fff;">
+                        <div class="square-upload-box" onclick="document.getElementById('bannerInput').click()">
                             <span id="bannerText">上傳 Banner</span>
-                            <img id="bannerPreview" style="display:none; width: 100%; height: 100%; object-fit: cover;">
+                            <img id="bannerPreview" style="display:none">
                         </div>
                         <input type="file" id="bannerInput" style="display:none" accept="image/*" onchange="previewBanner(this)">
                       </div>
@@ -82,37 +84,64 @@
               </div>
             </div>
 
-            <!-- 2. 合作單位 Logo 輪播管理 -->
+            <!-- 2. 合作單位 Logo 輪播管理 - 按照截圖修改為表格模式 -->
             <div class="templatemo-content-container">
               <div class="templatemo-content-widget no-padding">
                 <div class="panel panel-default">
-                  <div class="panel-heading"><h2>合作單位 Logo 輪播管理</h2></div>
+                  <div class="panel-heading"><h2>輪播圖管理</h2></div>
                   <div class="panel-body">
-                    <div class="well">
-                        <h4>新增 Logo 到輪播圖</h4>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <input type="file" id="logoInput" accept="image/*" class="form-control" onchange="previewLogo(this)">
-                                <div id="logoPreviewContainer" style="text-align:center; margin-top:10px;">
-                                    <img id="logoPreview" style="display:none; width: 50px; height: 50px; object-fit: contain;">
-                                </div>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" id="logoLink" class="form-control" placeholder="貼上網站連結 (https://...)">
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-success" style="width: 100%;" onclick="addLogo()">新增</button>
+                    <div class="row" style="margin-bottom: 20px; align-items: center;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>位置：</label>
+                                <select class="form-control">
+                                    <option>運營位1</option>
+                                    <option>運營位2</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="//carousel-preview">
-                        <h5>目前輪播內容預覽:</strong>
-                        <div class="carousel-preview-container" id="logoGrid">
-                            <!-- Logo items will be added here by JS -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>狀態：</label>
+                                <select class="form-control">
+                                    <option>展示中</option>
+                                    <option>未開始</option>
+                                    <option>已結束</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <button class="btn btn-info">搜索</button>
+                            <button class="btn btn-success" onclick="showAddModal()">新增</button>
                         </div>
                     </div>
-                    <hr>
-                    <button class="btn btn-primary" style="display: block; margin: 0 auto;">儲存所有 Logo 設定</button>
+                    
+                    <table class="carousel-mgmt-table table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>序號</th>
+                                <th>狀態</th>
+                                <th>排序值</th>
+                                <th>所屬位置</th>
+                                <th>展示開始時間</th>
+                                <th>展示結束時間</th>
+                                <th>圖片</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logoTableBody">
+                            <tr>
+                                <td>1</td>
+                                <td><span class="label label-success">展示中</span></td>
+                                <td>1</td>
+                                <td>運營位1</td>
+                                <td>2019-12-03 09:00</td>
+                                <td>2019-12-03 18:00</td>
+                                <td><img src="images/logo1.png" class="carousel-img-prev" onerror="this.src='https://via.placeholder.com/50'"></td>
+                                <td><a href="#" class="text-primary">編輯</a> <a href="#" class="text-danger">刪除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
